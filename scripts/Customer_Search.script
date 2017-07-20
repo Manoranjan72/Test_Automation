@@ -1,7 +1,7 @@
-﻿to Customer_Search CustName, CustType
+﻿to Customer_Search CustName, CustType22
 
 	Set CustomerName = CustName
-	Set CustomerType = CustType
+	Set CustomerType = CustType22
 	If Imagefound(5.0,Text: "Name Search")
 		TypeText CustomerName
 		If Imagefound("BDS_CustomerType")
