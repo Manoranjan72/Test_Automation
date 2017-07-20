@@ -1,0 +1,44 @@
+﻿to Customer_Search CustName, CustType
+
+	Set CustomerName = CustName
+	Set CustomerType = CustType
+	If Imagefound(5.0,Text: "Name Search")
+		TypeText CustomerName
+		If Imagefound("BDS_CustomerType")
+			Click foundimagelocation()
+			If CustomerType = "I"
+				Click "BDS_Individual"
+			Else
+				Click "BDS_Corporate"
+			End If
+			If  Imagefound(5.0,"BDS_SearchButton")
+				Click foundimagelocation()
+				If imagefound(5.0,"BDS_Alert")
+					If Imagefound(Text:"OK", CaseSensitive:"Yes")
+						Click foundimagelocation()
+						If imagefound("BDS_ServeNewCust") or Imagefound(Text:"Serve New Cust", CaseSensitive:"Yes")
+							Click foundimagelocation()
+						else
+							LogError "Serve New Customer button is missing"
+						End If
+					else
+						LogError "OK Button is missing"
+					End If
+				else
+					// If Simillar name is found
+					Log "Member having simillar name found"
+					If imagefound("BDS_ServeNewCust") --or Imagefound(Text:"Serve New Cust", CaseSensitive:"Yes")
+						Click foundimagelocation()
+					Else
+						LogError "New customer button is missing"
+					End If
+				End if
+			Else 
+				LogError "Search button is missing"
+			End If
+			
+		End If
+	else
+		LogError "Customer Name is not Present"
+	End If
+end Customer_Search

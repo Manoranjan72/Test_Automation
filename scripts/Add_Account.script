@@ -1,0 +1,23 @@
+﻿To Add_Account
+	If Imagefound(5.0,Text:"Add New")
+		Click foundimagelocation()
+		If imagefound("BDS_Account_Saving") // Make a Keyword to add all types of account
+			Click foundimagelocation()
+			If Imagefound("BDS_CustomerType")
+				Put everyimagelocation("BDS_CustomerType") into DropDwnList
+				Set n= 1
+				Repeat 6 times
+					Click item n of DropDwnList
+					Put item n of DropDwnList into (x,y)
+					Click (x+10,y+25)
+					set n=n+1
+				End Repeat
+				Click ("BDS_Next") 
+			End If
+		else
+			LogError "Savings account is not found"
+		end if		
+	else 
+		LogError "Add New button is not found"
+	End if
+End Add_Account
